@@ -1,26 +1,269 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+    --radius: 0.5rem;
+
+    /* NexaWork custom colors */
+    --nexapurple-50: 270 100% 98%;
+    --nexapurple-100: 270 100% 95%;
+    --nexapurple-200: 270 100% 91%;
+    --nexapurple-300: 270 100% 85%;
+    --nexapurple-400: 270 100% 75%;
+    --nexapurple-500: 270 100% 65%;
+    --nexapurple-600: 270 100% 55%;
+    --nexapurple-700: 270 100% 45%;
+    --nexapurple-800: 270 100% 35%;
+    --nexapurple-900: 270 100% 25%;
+    --nexapurple-950: 270 100% 15%;
+
+    /* Sidebar colors */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+
+    /* Sidebar colors */
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 0 0% 98%;
+    --sidebar-primary-foreground: 240 5.9% 10%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-size: 16px;
+  }
+
+  /* Increase base font size for better readability */
+  html {
+    font-size: 16px;
+  }
+
+  /* Increase heading sizes */
+  h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+
+  h2 {
+    font-size: 2rem;
+    line-height: 1.25;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
+
+  /* Increase form element sizes */
+  input,
+  select,
+  textarea {
+    font-size: 1rem;
+    padding: 0.75rem;
+  }
+
+  /* Increase button sizes */
+  button,
+  .btn {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+  }
+}
+
+/* Fix for button styling in light mode */
+.bg-nexapurple-700 {
+  background-color: hsl(var(--nexapurple-700));
+  color: white;
+}
+
+.hover\:bg-nexapurple-800:hover {
+  background-color: hsl(var(--nexapurple-800));
+}
+
+/* Ensure form buttons are always visible */
+form button[type="submit"] {
+  background-color: hsl(var(--nexapurple-700));
+  color: white;
+}
+
+form button[type="submit"]:hover {
+  background-color: hsl(var(--nexapurple-800));
+}
+
+/* Fix for outline buttons in light mode */
+.border-gray-300 {
+  border-color: #d1d5db;
+}
+
+.text-gray-700 {
+  color: #374151;
+}
+
+.dark .border-gray-600 {
+  border-color: #4b5563;
+}
+
+.dark .text-gray-200 {
+  color: #e5e7eb;
+}
+
+/* Increase component sizes */
+.card {
+  padding: 1.5rem;
+}
+
+.card-header {
+  padding: 1.5rem 1.5rem 0.75rem 1.5rem;
+}
+
+.card-content {
+  padding: 1.5rem;
+}
+
+.card-footer {
+  padding: 0.75rem 1.5rem 1.5rem 1.5rem;
+}
+
+/* Increase form element sizes */
+.input,
+.select,
+.textarea {
+  height: 3rem;
+  font-size: 1rem;
+}
+
+/* Increase button sizes */
+.button,
+button {
+  height: 3rem;
+  font-size: 1rem;
+  padding: 0 1.5rem;
+}
+
+/* Increase tab sizes */
+.tabs-trigger {
+  height: 3rem;
+  font-size: 1rem;
+}
+
+/* Increase badge sizes */
+.badge {
+  font-size: 0.875rem;
+  padding: 0.5rem 0.75rem;
+}
+
+/* Increase progress bar size */
+.progress {
+  height: 0.75rem;
+}
+
+/* Increase spacing */
+.space-y-2 > * + * {
+  margin-top: 0.75rem !important;
+}
+
+.space-y-4 > * + * {
+  margin-top: 1.5rem !important;
+}
+
+.space-y-6 > * + * {
+  margin-top: 2rem !important;
+}
+
+.space-y-8 > * + * {
+  margin-top: 2.5rem !important;
+}
+
+/* Increase gap sizes */
+.gap-2 {
+  gap: 0.75rem;
+}
+
+.gap-4 {
+  gap: 1.5rem;
+}
+
+.gap-6 {
+  gap: 2rem;
+}
+
+.gap-8 {
+  gap: 2.5rem;
+}
+
+/* Dashboard layout improvements */
+.dashboard-content {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Ensure cards in dashboard use full width */
+.dashboard-card {
+  width: 100%;
+}
+
+/* Increase spacing in dashboard */
+@media (min-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
 }
