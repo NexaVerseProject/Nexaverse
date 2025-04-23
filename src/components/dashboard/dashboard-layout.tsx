@@ -95,7 +95,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                   </SidebarMenuItem>
                   <SidebarMenuItem>
                     <SidebarMenuButton asChild isActive={pathname === "/dashboard/messages"}>
-                      <Link href="/dashboard/messages">
+                      <Link href="/messages/inbox">
                         <MessageSquare className="mr-2" />
                         Messages
                       </Link>
