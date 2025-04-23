@@ -53,12 +53,25 @@ export default function FreelancerDashboard() {
                         </Card>
                         <Card>
                             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                                <CardTitle className="text-base font-medium">Messages</CardTitle>
+                                <CardTitle className="text-base font-medium">
+                                    Messages
+                                    <span className="bg-red-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full">
+                                        5
+                                    </span>
+                                </CardTitle>
                                 <MessageSquare className="h-5 w-5 text-muted-foreground" />
                             </CardHeader>
                             <CardContent>
                                 <div className="text-3xl font-bold">12</div>
                                 <p className="text-sm text-muted-foreground">5 unread</p>
+
+                                <div className="text-sm border-t pt-3 mt-3 space-y-1">
+                                    <p className="font-medium">From: Susan (1h ago)</p>
+                                    <p className="text-muted-foreground truncate">Hey Alex, just a follow up on the project...</p>
+                                </div>
+                                <Link href='/messages/inbox'>
+                                    <Button variant='outline' className="mt-3 w-full">View All Messages</Button>
+                                </Link>
                             </CardContent>
                         </Card>
                         <Card>
