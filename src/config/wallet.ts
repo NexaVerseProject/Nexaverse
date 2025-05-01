@@ -1,18 +1,18 @@
 import { createAppKit } from '@reown/appkit/react';
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi';
-import { mainnet, polygon, arbitrum, optimism, base } from '@reown/appkit/networks';
+import { mainnet, polygon, arbitrum, optimism, base, bsc } from '@reown/appkit/networks';
 import { cookieStorage, createStorage } from 'wagmi';
 
 // Get projectId from Reown Cloud (https://cloud.reown.com)
 export const projectId = process.env.NEXT_PUBLIC_WALLET_PROJECT_ID || '';
 
-// Define networks you want to support
 export const networks = [
     mainnet,
     polygon,
     optimism,
     base,
-    arbitrum
+    arbitrum,
+    bsc
 ];
 
 // Set up the Wagmi Adapter
@@ -38,7 +38,7 @@ createAppKit({
     },
     features: {
         analytics: false,
-        email: true,
+        email: false,
         socials: ['google', 'github'],
         emailShowWallets: true
     },

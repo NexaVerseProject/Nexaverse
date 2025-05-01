@@ -102,16 +102,10 @@ const accountMenu = [
 const DashboardSidebar = memo(function DashboardSidebar({ pathname, userType }: { pathname: string;userType: string | null }) {
   return (
     <Sidebar>
-      <SidebarHeader>
-        <div className="flex items-center px-2 py-4">
-          <Link href={`/dashboard/${userType}`}  className="text-2xl font-bold text-primary" >
-            NexaWork
-          </Link>
-        </div>
-      </SidebarHeader>
+      <SidebarHeader className="flex items-center px-2 py-10 "></SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Main</SidebarGroupLabel>
+          <SidebarGroupLabel className="flex items-center px-2 py-5 ">Main</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {mainMenu.map((item) => (
@@ -135,7 +129,7 @@ const DashboardSidebar = memo(function DashboardSidebar({ pathname, userType }: 
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel>Finance</SidebarGroupLabel>
+          <SidebarGroupLabel className="py-5">Finance</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {financeMenu.map((item) => (
