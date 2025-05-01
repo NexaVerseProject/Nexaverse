@@ -3,9 +3,29 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu, Wallet, X, User } from "lucide-react";
+import { Menu, X, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/theme/mode-toggle";
+import { useAccount } from "wagmi";
+import { LogoutButton } from "@/components/auth/logout-button";
+
+const publicLinks = [
+  { href: "/", label: "Home" },
+  { href: "/for-business", label: "For Business" },
+  { href: "/about", label: "About Us" },
+];
+
+const authenticatedLinks = [
+  { href: "/dashboard", label: "Dashboard" },
+  { href: "/marketplace", label: "Marketplace" },
+  { href: "/talent", label: "Search Talent" },
+];
+
+const userTypeLinks = {
+  "job-poster": [{ href: "/dashboard/post-job", label: "Post Job" }],
+  business: [{ href: "/hire-talent", label: "Hire Talent" }],
+  freelancer: [],
+};
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,17 +35,16 @@ export default function Navbar() {
   const [userType, setUserType] = useState<
     "freelancer" | "business" | "job-poster" | null
   >(null);
+  const { isConnected } = useAccount();
+  const [mounted, setMounted] = useState(false);
   useEffect(() => {
-    // Check for auth token in cookies
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
     const hasAuthToken = document.cookie.includes("auth_token");
-
-    // Also check localStorage as a fallback
     const hasLocalAuth = localStorage.getItem("auth_token") === "true";
-
-    // Set authenticated if either check passes
     setIsAuthenticated(hasAuthToken || hasLocalAuth);
-
-    // Get user type from localStorage or set a default
     if (hasAuthToken || hasLocalAuth) {
       const savedUserType = localStorage.getItem("user_type") as
         | "freelancer"
@@ -34,11 +53,8 @@ export default function Navbar() {
         | null;
       setUserType(savedUserType || "freelancer");
     }
-  }, [pathname]); // Re-check when pathname changes
-
-  // Function to handle logout
+  }, [pathname]);
   const handleLogout = () => {
-    // Clear auth token from both cookie and localStorage
     document.cookie = "auth_token=; path=/; max-age=0";
     localStorage.removeItem("auth_token");
     localStorage.removeItem("user_type");
@@ -54,131 +70,66 @@ export default function Navbar() {
     // Refresh the page to update UI
     window.location.reload();
   };
+  const getUserTypeLinks = () => {
+    if (!userType) return [];
+    return userTypeLinks[userType] || [];
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-20 items-center justify-between max-w-full px-4 md:px-8 lg:px-12">
         <div className="flex items-center gap-3">
-          <Link href="/" className="flex items-center space-x-2">
-            <span className="text-3xl font-bold text-nexapurple-700">
-              NexaWork
-            </span>
-          </Link>
+          {isAuthenticated ? (
+            <Link
+              href={`/dashboard/${userType}`}
+              className="flex items-center space-x-2"
+            >
+              <span className="text-3xl font-bold text-nexapurple-700">
+                NexaWork
+              </span>
+            </Link>
+          ) : (
+            <Link href="/" className="flex items-center space-x-2">
+              <span className="text-3xl font-bold text-nexapurple-700">
+                NexaWork
+              </span>
+            </Link>
+          )}
           <nav className="hidden md:flex gap-8 ml-10">
-            {/* Always show these links */}
-            {!isAuthenticated && (
-              <>
-                <Link
-                  href="/"
-                  className={`text-base font-medium transition-colors hover:text-nexapurple-700 ${
-                    pathname === "/"
-                      ? "text-nexapurple-700"
-                      : "text-foreground/60"
-                  }`}
-                >
-                  Home
-                </Link>
-                <Link
-                  href="/for-business"
-                  className={`text-base font-medium transition-colors hover:text-nexapurple-700 ${
-                    pathname === "/for-business"
-                      ? "text-nexapurple-700"
-                      : "text-foreground/60"
-                  }`}
-                >
-                  For Business
-                </Link>
-                <Link
-                  href="/about"
-                  className={`text-base font-medium transition-colors hover:text-nexapurple-700 ${
-                    pathname === "/about"
-                      ? "text-nexapurple-700"
-                      : "text-foreground/60"
-                  }`}
-                >
-                  About Us
-                </Link>
-              </>
-            )}
-
-            {/* Only show these links when authenticated */}
-            {isAuthenticated && (
-              <>
-                <Link
-                  href="/dashboard"
-                  className={`text-base font-medium transition-colors hover:text-nexapurple-700 ${
-                    pathname === "/dashboard"
-                      ? "text-nexapurple-700"
-                      : "text-foreground/60"
-                  }`}
-                >
-                  Dashboard
-                </Link>
-                <Link
-                  href="/marketplace"
-                  className={`text-base font-medium transition-colors hover:text-nexapurple-700 ${
-                    pathname === "/marketplace"
-                      ? "text-nexapurple-700"
-                      : "text-foreground/60"
-                  }`}
-                >
-                  Marketplace
-                </Link>
-                <Link
-                  href="/talent"
-                  className={`text-base font-medium transition-colors hover:text-nexapurple-700 ${
-                    pathname === "/talent"
-                      ? "text-nexapurple-700"
-                      : "text-foreground/60"
-                  }`}
-                >
-                  Search Talent
-                </Link>
-
-                {/* Conditional links based on user type */}
-                {userType === "job-poster" && (
+            {/* Desktop links */}
+            {!isAuthenticated
+              ? publicLinks.map((link) => (
                   <Link
-                    href="/dashboard/post-job"
+                    key={link.href}
+                    href={link.href}
                     className={`text-base font-medium transition-colors hover:text-nexapurple-700 ${
-                      pathname === "/dashboard/post-job"
+                      pathname === link.href
                         ? "text-nexapurple-700"
                         : "text-foreground/60"
                     }`}
                   >
-                    Post Job
+                    {link.label}
                   </Link>
-                )}
-
-                {userType === "business" && (
+                ))
+              : [...authenticatedLinks, ...getUserTypeLinks()].map((link) => (
                   <Link
-                    href="/hire-talent"
+                    key={link.href}
+                    href={link.href}
                     className={`text-base font-medium transition-colors hover:text-nexapurple-700 ${
-                      pathname === "/hire-talent"
+                      pathname === link.href
                         ? "text-nexapurple-700"
                         : "text-foreground/60"
                     }`}
                   >
-                    Hire Talent
+                    {link.label}
                   </Link>
-                )}
-              </>
-            )}
+                ))}
           </nav>
         </div>
         <div className="flex items-center gap-3">
           <div className="hidden md:flex items-center gap-3">
             {!isAuthenticated ? (
               <>
-                <Link href="/connect-wallet">
-                  <Button
-                    variant="outline"
-                    size="default"
-                    className="gap-2 border-gray-300 text-gray-700 dark:border-gray-600 dark:text-gray-200 text-base px-5 py-2.5"
-                  >
-                    <Wallet className="h-5 w-5" />
-                    Connect Wallet
-                  </Button>
-                </Link>
                 <Link href="/login">
                   <Button
                     variant="outline"
@@ -209,14 +160,7 @@ export default function Navbar() {
                     My Profile
                   </Button>
                 </Link>
-                <Button
-                  size="default"
-                  className="bg-nexapurple-700 hover:bg-nexapurple-800 text-white text-base px-5 py-2.5"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </Button>
-
+                <LogoutButton />
                 {/* Demo user type selector - remove in production */}
                 <div className="ml-4 border-l pl-4 flex items-center gap-2">
                   <span className="text-sm text-muted-foreground">Demo:</span>
@@ -257,94 +201,32 @@ export default function Navbar() {
       {isMenuOpen && (
         <div className="container md:hidden py-6 border-t">
           <nav className="flex flex-col gap-5">
-            {/* Mobile menu links */}
-            {!isAuthenticated ? (
-              <>
-                <Link
-                  href="/"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block py-2.5 text-lg"
-                >
-                  Home
-                </Link>
-                <Link
-                  href="/for-business"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block py-2.5 text-lg"
-                >
-                  For Business
-                </Link>
-                <Link
-                  href="/about"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block py-2.5 text-lg"
-                >
-                  About Us
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link
-                  href="/dashboard"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block py-2.5 text-lg"
-                >
-                  Dashboard
-                </Link>
-                <Link
-                  href="/marketplace"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block py-2.5 text-lg"
-                >
-                  Marketplace
-                </Link>
-                <Link
-                  href="/talent"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block py-2.5 text-lg"
-                >
-                  Search Talent
-                </Link>
-
-                {/* Conditional links based on user type */}
-                {userType === "job-poster" && (
+            {/* Mobile links */}
+            {!isAuthenticated
+              ? publicLinks.map((link) => (
                   <Link
-                    href="/dashboard/post-job"
+                    key={link.href}
+                    href={link.href}
                     onClick={() => setIsMenuOpen(false)}
                     className="block py-2.5 text-lg"
                   >
-                    Post Job
+                    {link.label}
                   </Link>
-                )}
-
-                {userType === "business" && (
+                ))
+              : [...authenticatedLinks, ...getUserTypeLinks()].map((link) => (
                   <Link
-                    href="/hire-talent"
+                    key={link.href}
+                    href={link.href}
                     onClick={() => setIsMenuOpen(false)}
                     className="block py-2.5 text-lg"
                   >
-                    Hire Talent
+                    {link.label}
                   </Link>
-                )}
-              </>
-            )}
+                ))}
 
-            <div className="flex flex-col gap-3 pt-3 border-t">
+            <div className="flex flex-col gap-3 mt-6">
               {!isAuthenticated ? (
                 <>
-                  <Link
-                    href="/connect-wallet"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      className="w-full gap-2 border-gray-300 text-gray-700 dark:border-gray-600 dark:text-gray-200"
-                    >
-                      <Wallet className="h-5 w-5" />
-                      Connect Wallet
-                    </Button>
-                  </Link>
                   <Link href="/login" onClick={() => setIsMenuOpen(false)}>
                     <Button
                       variant="outline"
@@ -378,19 +260,14 @@ export default function Navbar() {
                       My Profile
                     </Button>
                   </Link>
-                  <Button
-                    size="lg"
-                    className="w-full bg-nexapurple-700 hover:bg-nexapurple-800 text-white"
-                    onClick={() => {
-                      handleLogout();
-                      setIsMenuOpen(false);
-                    }}
-                  >
-                    Logout
-                  </Button>
                 </>
               )}
             </div>
+            {isAuthenticated && (
+              <div className="mt-4">
+                <LogoutButton />
+              </div>
+            )}
           </nav>
         </div>
       )}

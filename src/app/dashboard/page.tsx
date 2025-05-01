@@ -14,11 +14,9 @@ export default function Dashboard() {
       return
     }
 
-    // Redirect to the appropriate dashboard based on user type
     if (userType) {
       router.push(`/dashboard/${userType}`)
     } else {
-      // Default to freelancer dashboard if no user type is set
       router.push("/dashboard/freelancer")
     }
   }, [isAuthenticated, userType, router])

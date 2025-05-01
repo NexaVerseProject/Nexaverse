@@ -1,45 +1,70 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { AlertCircle, CheckCircle2, Wallet } from "lucide-react"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { CheckCircle2, Wallet } from "lucide-react";
+import { useAccount } from "wagmi";
+import { useAppKit } from "@reown/appkit/react";
+import { NetworkButton } from "@/components/wallet/NetworkButton";
 
 export default function ConnectWallet() {
-  const [connecting, setConnecting] = useState(false)
-  const [connected, setConnected] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const { address, isConnected } = useAccount();
+  const { open } = useAppKit();
+  const router = useRouter();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-  const handleConnect = (walletType: string) => {
-    setConnecting(true)
-    setError(null)
+  // Redirect to dashboard if connected
+  useEffect(() => {
+    if (mounted && isConnected) {
+      const redirectTimer = setTimeout(() => {
+        router.push("/dashboard");
+      }, 3000);
 
-    // Simulate wallet connection
-    setTimeout(() => {
-      if (walletType === "error") {
-        setError("Failed to connect to wallet. Please try again.")
-        setConnecting(false)
-        return
-      }
+      return () => clearTimeout(redirectTimer);
+    }
+  }, [isConnected, mounted, router]);
 
-      setConnected(true)
-      setConnecting(false)
-    }, 1500)
+  if (!mounted) {
+    return (
+      <div className="container max-w-md py-10">
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-2 text-center">
+            <h1 className="text-3xl font-bold tracking-tight">
+              Connect Your Wallet
+            </h1>
+            <p className="text-muted-foreground">Loading...</p>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="container max-w-md py-10">
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-2 text-center">
-          <h1 className="text-3xl font-bold tracking-tight">Connect Your Wallet</h1>
+          <h1 className="text-3xl font-bold tracking-tight">
+            Connect Your Wallet
+          </h1>
           <p className="text-muted-foreground">
-            Connect your wallet to access the NexaWork platform and start earning NexaPoints
+            Connect your wallet to access the NexaWork platform and start
+            earning NexaPoints
           </p>
         </div>
 
-        {connected ? (
+        {isConnected && address ? (
           <Card>
             <CardHeader>
               <div className="flex items-center justify-center mb-2">
@@ -53,133 +78,48 @@ export default function ConnectWallet() {
             <CardContent>
               <div className="rounded-lg border p-3">
                 <div className="flex justify-between items-center">
-                  <div className="font-mono text-sm">0x71C...8F3E</div>
-                  <div className="text-sm font-medium text-green-500">Connected</div>
+                  <div className="font-mono text-sm">{`${address.slice(
+                    0,
+                    6
+                  )}...${address.slice(-4)}`}</div>
+                  <div className="text-sm font-medium text-green-500">
+                    Connected
+                  </div>
                 </div>
+              </div>
+              <div className="mt-4">
+                <NetworkButton />
               </div>
             </CardContent>
             <CardFooter className="flex justify-center">
               <Button
                 className="bg-purple-600 hover:bg-purple-700"
-                onClick={() => (window.location.href = "/dashboard")}
+                onClick={() => router.push("/dashboard")}
               >
                 Go to Dashboard
               </Button>
             </CardFooter>
           </Card>
         ) : (
-          <>
-            {error && (
-              <Alert variant="destructive">
-                <AlertCircle className="h-4 w-4" />
-                <AlertTitle>Error</AlertTitle>
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Select Wallet</CardTitle>
-                <CardDescription>Choose your preferred wallet to connect to the NexaWork platform</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Tabs defaultValue="popular">
-                  <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="popular">Popular</TabsTrigger>
-                    <TabsTrigger value="all">All Wallets</TabsTrigger>
-                  </TabsList>
-                  <TabsContent value="popular" className="space-y-4 mt-4">
-                    <WalletOption
-                      name="MetaMask"
-                      icon="/placeholder.svg?height=40&width=40"
-                      onClick={() => handleConnect("metamask")}
-                      connecting={connecting}
-                    />
-                    <WalletOption
-                      name="Coinbase Wallet"
-                      icon="/placeholder.svg?height=40&width=40"
-                      onClick={() => handleConnect("coinbase")}
-                      connecting={connecting}
-                    />
-                    <WalletOption
-                      name="WalletConnect"
-                      icon="/placeholder.svg?height=40&width=40"
-                      onClick={() => handleConnect("walletconnect")}
-                      connecting={connecting}
-                    />
-                  </TabsContent>
-                  <TabsContent value="all" className="space-y-4 mt-4">
-                    <WalletOption
-                      name="MetaMask"
-                      icon="/placeholder.svg?height=40&width=40"
-                      onClick={() => handleConnect("metamask")}
-                      connecting={connecting}
-                    />
-                    <WalletOption
-                      name="Coinbase Wallet"
-                      icon="/placeholder.svg?height=40&width=40"
-                      onClick={() => handleConnect("coinbase")}
-                      connecting={connecting}
-                    />
-                    <WalletOption
-                      name="WalletConnect"
-                      icon="/placeholder.svg?height=40&width=40"
-                      onClick={() => handleConnect("walletconnect")}
-                      connecting={connecting}
-                    />
-                    <WalletOption
-                      name="Trust Wallet"
-                      icon="/placeholder.svg?height=40&width=40"
-                      onClick={() => handleConnect("trust")}
-                      connecting={connecting}
-                    />
-                    <WalletOption
-                      name="Phantom"
-                      icon="/placeholder.svg?height=40&width=40"
-                      onClick={() => handleConnect("phantom")}
-                      connecting={connecting}
-                    />
-                    <WalletOption
-                      name="Error Wallet (Demo)"
-                      icon="/placeholder.svg?height=40&width=40"
-                      onClick={() => handleConnect("error")}
-                      connecting={connecting}
-                    />
-                  </TabsContent>
-                </Tabs>
-              </CardContent>
-              <CardFooter className="flex flex-col gap-2">
-                <p className="text-sm text-muted-foreground text-center">
-                  By connecting your wallet, you agree to our Terms of Service and Privacy Policy
-                </p>
-              </CardFooter>
-            </Card>
-          </>
+          <Card>
+            <CardHeader>
+              <CardTitle>Connect Wallet</CardTitle>
+              <CardDescription>
+                Choose your preferred wallet to connect to the NexaWork platform
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex justify-center">
+              <appkit-button />
+            </CardContent>
+            <CardFooter className="flex flex-col gap-2">
+              <p className="text-sm text-muted-foreground text-center">
+                By connecting your wallet, you agree to our Terms of Service and
+                Privacy Policy
+              </p>
+            </CardFooter>
+          </Card>
         )}
       </div>
     </div>
-  )
-}
-
-interface WalletOptionProps {
-  name: string
-  icon: string
-  onClick: () => void
-  connecting: boolean
-}
-
-function WalletOption({ name, icon, onClick, connecting }: WalletOptionProps) {
-  return (
-    <Button variant="outline" className="w-full justify-between h-auto py-3" onClick={onClick} disabled={connecting}>
-      <div className="flex items-center">
-        <img src={icon || "/placeholder.svg"} alt={name} className="w-6 h-6 mr-3" />
-        <span>{name}</span>
-      </div>
-      {connecting ? (
-        <div className="h-5 w-5 animate-spin rounded-full border-2 border-solid border-current border-r-transparent" />
-      ) : (
-        <Wallet className="h-5 w-5" />
-      )}
-    </Button>
-  )
+  );
 }
