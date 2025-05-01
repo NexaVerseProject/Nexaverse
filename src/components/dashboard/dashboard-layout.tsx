@@ -1,9 +1,8 @@
-"use client"
+"use client";
 
-import type React from "react"
-
-import { useState, useEffect } from "react"
-import { usePathname } from "next/navigation"
+import type React from "react";
+import { useState, useEffect, memo, useMemo } from "react";
+import { usePathname } from "next/navigation";
 import {
   Sidebar,
   SidebarProvider,
@@ -16,10 +15,9 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
-} from "@/components/ui/sidebar"
-import { LogoutButton } from "@/components/auth/logout-button"
-import { useIsMobile } from "@/hooks/use-mobile"
-import Link from "next/link"
+} from "@/components/ui/sidebar";
+import { useIsMobile } from "@/hooks/use-mobile";
+import Link from "next/link";
 import {
   LayoutDashboard,
   Briefcase,
@@ -30,151 +28,202 @@ import {
   Wallet,
   User,
   Settings,
-} from "lucide-react"
+} from "lucide-react";
 
 interface DashboardLayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
+const mainMenu = [
+  {
+    href: (userType: string | null) => `/dashboard/${userType}`,
+    label: "Dashboard",
+    icon: LayoutDashboard,
+    isActive: (pathname: string, userType: string | null) =>
+      pathname === `/dashboard/${userType}`,
+  },
+  {
+    href: "/dashboard/jobs",
+    label: "Jobs",
+    icon: Briefcase,
+    isActive: (pathname: string) => pathname === "/dashboard/jobs",
+  },
+  {
+    href: "/dashboard/proposals",
+    label: "Proposals",
+    icon: FileText,
+    isActive: (pathname: string) => pathname === "/dashboard/proposals",
+  },
+  {
+    href: "/messages",
+    label: "Messages",
+    icon: MessageSquare,
+    isActive: (pathname: string) => pathname === "/messages",
+  },
+  {
+    href: "/dashboard/analytics",
+    label: "Analytics",
+    icon: BarChart,
+    isActive: (pathname: string) => pathname === "/dashboard/analytics",
+  },
+];
+
+const financeMenu = [
+  {
+    href: "/dashboard/payments",
+    label: "Payments",
+    icon: CreditCard,
+    isActive: (pathname: string) => pathname === "/dashboard/payments",
+  },
+  {
+    href: "/dashboard/wallet",
+    label: "Wallet",
+    icon: Wallet,
+    isActive: (pathname: string) => pathname === "/dashboard/wallet",
+  },
+];
+
+const accountMenu = [
+  {
+    href: "/dashboard/profile",
+    label: "Profile",
+    icon: User,
+    isActive: (pathname: string) => pathname === "/dashboard/profile",
+  },
+  {
+    href: "/dashboard/settings",
+    label: "Settings",
+    icon: Settings,
+    isActive: (pathname: string) => pathname === "/dashboard/settings",
+  },
+];
+
+// Memoize the sidebar to prevent re-renders
+const DashboardSidebar = memo(function DashboardSidebar({ pathname, userType }: { pathname: string;userType: string | null }) {
+  return (
+    <Sidebar>
+      <SidebarHeader>
+        <div className="flex items-center px-2 py-4">
+          <Link href={`/dashboard/${userType}`}  className="text-2xl font-bold text-primary" >
+            NexaWork
+          </Link>
+        </div>
+      </SidebarHeader>
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>Main</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {mainMenu.map((item) => (
+                <SidebarMenuItem key={item.label}>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={ typeof item.isActive === "function"
+                        ? item.isActive(pathname, userType)
+                        : false
+                    }
+                  >
+                    <Link href={  typeof item.href === "function" ? item.href(userType): item.href }>
+                      <item.icon className="mr-2" />
+                      {item.label}
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel>Finance</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {financeMenu.map((item) => (
+                <SidebarMenuItem key={item.label}>
+                  <SidebarMenuButton asChild isActive={item.isActive(pathname)}>
+                    <Link href={item.href}>
+                      <item.icon className="mr-2" />
+                      {item.label}
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel>Account</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {accountMenu.map((item) => (
+                <SidebarMenuItem key={item.label}>
+                  <SidebarMenuButton asChild isActive={item.isActive(pathname)}>
+                    <Link href={item.href}>
+                      <item.icon className="mr-2" />
+                      {item.label}
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+      <SidebarFooter />
+    </Sidebar>
+  );
+});
+
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
-  const pathname = usePathname()
-  const isMobile = useIsMobile()
-  const [userType, setUserType] = useState<string | null>(null)
-  const [mounted, setMounted] = useState(false)
+  const pathname = usePathname();
+  const isMobile = useIsMobile();
+  const [userType, setUserType] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Get user type from localStorage
-    const savedUserType = localStorage.getItem("user_type")
-    setUserType(savedUserType || "freelancer")
-    setMounted(true)
-  }, [])
+    const savedUserType = localStorage.getItem("user_type");
+    setUserType(savedUserType || "freelancer");
+    setMounted(true);
+
+    const preloadRoutes = [
+      "/dashboard/wallet",
+      "/dashboard/profile",
+      "/dashboard/jobs",
+    ];
+
+    // Preload the next likely pages
+    preloadRoutes.forEach((route) => {
+      const link = document.createElement("link");
+      link.rel = "prefetch";
+      link.href = route;
+      document.head.appendChild(link);
+    });
+  }, []);
+
+  // Memoize the sidebar state to prevent unnecessary re-renders
+  const sidebarMemo = useMemo(
+    () => <DashboardSidebar pathname={pathname} userType={userType} />,
+    [pathname, userType]
+  );
 
   if (!mounted) {
-    return null
+    return null;
   }
 
   return (
     <div className="flex min-h-screen">
       <SidebarProvider>
-        <Sidebar>
-          <SidebarHeader>
-            <div className="flex items-center px-2 py-4">
-              <Link href="/" className="text-2xl font-bold text-primary">
-                NexaWork
-              </Link>
-            </div>
-          </SidebarHeader>
-          <SidebarContent>
-            <SidebarGroup>
-              <SidebarGroupLabel>Main</SidebarGroupLabel>
-              <SidebarGroupContent>
-                <SidebarMenu>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={pathname === `/dashboard/${userType}`}>
-                      <Link href={`/dashboard/${userType}`}>
-                        <LayoutDashboard className="mr-2" />
-                        Dashboard
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={pathname === "/dashboard/jobs"}>
-                      <Link href="/dashboard/jobs">
-                        <Briefcase className="mr-2" />
-                        Jobs
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={pathname === "/dashboard/proposals"}>
-                      <Link href="/dashboard/proposals">
-                        <FileText className="mr-2" />
-                        Proposals
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={pathname === "/dashboard/messages"}>
-                      <Link href="/messages/inbox">
-                        <MessageSquare className="mr-2" />
-                        Messages
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={pathname === "/dashboard/analytics"}>
-                      <Link href="/dashboard/analytics">
-                        <BarChart className="mr-2" />
-                        Analytics
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </SidebarGroup>
-
-            <SidebarGroup>
-              <SidebarGroupLabel>Finance</SidebarGroupLabel>
-              <SidebarGroupContent>
-                <SidebarMenu>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={pathname === "/dashboard/payments"}>
-                      <Link href="/dashboard/payments">
-                        <CreditCard className="mr-2" />
-                        Payments
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={pathname === "/dashboard/wallet"}>
-                      <Link href="/dashboard/wallet">
-                        <Wallet className="mr-2" />
-                        Wallet
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </SidebarGroup>
-
-            <SidebarGroup>
-              <SidebarGroupLabel>Account</SidebarGroupLabel>
-              <SidebarGroupContent>
-                <SidebarMenu>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={pathname === "/dashboard/profile"}>
-                      <Link href="/dashboard/profile">
-                        <User className="mr-2" />
-                        Profile
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={pathname === "/dashboard/settings"}>
-                      <Link href="/dashboard/settings">
-                        <Settings className="mr-2" />
-                        Settings
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </SidebarGroup>
-          </SidebarContent>
-          <SidebarFooter>
-            <div className="flex items-center justify-between p-4">
-              <LogoutButton />
-            </div>
-          </SidebarFooter>
-        </Sidebar>
+        {sidebarMemo}
 
         {/* Main Content */}
         <div className="flex-1 flex flex-col">
-
           {/* Page Content */}
-          <main className="flex-1 overflow-auto p-6 max-w-[1800px] mx-auto w-full">{children}</main>
+          <main className="flex-1 overflow-auto p-6 max-w-[1800px] mx-auto w-full">
+            {children}
+          </main>
         </div>
       </SidebarProvider>
     </div>
-  )
+  );
 }

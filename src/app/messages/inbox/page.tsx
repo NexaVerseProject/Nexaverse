@@ -1,12 +1,16 @@
-// app/messages/inbox/page.tsx
-'use client';
-import MessageCard from "@/components/MessageCard";
+"use client";
 
-export default function InboxPage() {
-  return (
-    <div className="p-4">
-      <h2 className="text-xl font-bold mb-4">Inbox</h2>
-      <MessageCard />
-    </div>
-  );
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+
+export default function InboxRedirect() {
+    const router = useRouter();
+    useEffect(() => {
+        router.replace("/messages");
+    }, [router]);
+    return (
+        <div className="flex items-center justify-center min-h-[300px]">
+            <p className="text-muted-foreground">Redirecting to messages...</p>
+        </div>
+    );
 }
