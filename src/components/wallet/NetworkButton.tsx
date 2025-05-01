@@ -29,8 +29,7 @@ export function NetworkButton() {
   }
   const currentNetwork = networks.find((network) => network.id === chainId);
   const networkName = currentNetwork?.name || "Unknown Network";
-  const shortNetworkName = networkName.split(" ")[0]; // Just take the first word
-
+  const shortNetworkName = networkName.split(" ")[0]; 
   return (
     <Button
       variant="ghost"
@@ -39,11 +38,7 @@ export function NetworkButton() {
       onClick={handleNetworkClick}
       disabled={isLoading}
     >
-      {isLoading ? (
-        <Loader2 className="h-4 w-4 animate-spin" />
-      ) : (
-        <Globe className="h-4 w-4" />
-      )}
+      {isLoading ? (<Loader2 className="h-4 w-4 animate-spin" />) : ( <Globe className="h-4 w-4" />)}
       <span className="text-xs">{shortNetworkName}</span>
     </Button>
   );

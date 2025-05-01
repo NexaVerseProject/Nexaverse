@@ -5,8 +5,6 @@ import { useAppKit } from "@reown/appkit/react";
 import { useAccount } from "wagmi";
 import { Wallet, Loader2, AlertCircle } from "lucide-react";
 import { useState, useEffect } from "react";
-
-// Add window.ethereum type definition
 declare global {
   interface Window {
     ethereum?: Record<string, unknown>;
@@ -19,8 +17,6 @@ export function ConnectButton() {
   const [mounted, setMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  // Prevent hydration mismatch
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -89,16 +85,8 @@ export function ConnectButton() {
   }
 
   return (
-    <Button
-      variant="ghost"
-      size="sm"
-      className="gap-1 px-2"
-      onClick={handleConnect}
-      disabled={isLoading}
-    >
-      {isLoading ? (
-        <Loader2 className="h-4 w-4 animate-spin" />
-      ) : error ? (
+    <Button variant="ghost" size="sm" className="gap-1 px-2" onClick={handleConnect} disabled={isLoading}>
+      {isLoading ? (<Loader2 className="h-4 w-4 animate-spin" />) : error ? (
         <AlertCircle className="h-4 w-4 text-red-500" />
       ) : (
         <Wallet className="h-4 w-4" />
@@ -109,8 +97,6 @@ export function ConnectButton() {
     </Button>
   );
 }
-
-// Web component version of the connect button that might work better
 export function ConnectButtonWebComponent() {
   // Use direct HTML to ensure proper rendering
   return (
