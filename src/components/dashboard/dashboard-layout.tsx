@@ -1,5 +1,4 @@
 "use client";
-
 import type React from "react";
 import { useState, useEffect, memo, useMemo } from "react";
 import { usePathname } from "next/navigation";
@@ -209,7 +208,6 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     <div className="flex min-h-screen">
       <SidebarProvider>
         {sidebarMemo}
-
         {/* Main Content */}
         <div className="flex-1 flex flex-col">
           {/* Page Content */}
@@ -218,6 +216,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           </main>
         </div>
       </SidebarProvider>
+      
     </div>
   );
 }
