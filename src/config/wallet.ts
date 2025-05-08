@@ -19,7 +19,7 @@ export const networks = [
 export const wagmiAdapter = new WagmiAdapter({
     storage: createStorage({
         storage: cookieStorage
-    }),
+    }) as any,
     ssr: true,
     networks,
     projectId
