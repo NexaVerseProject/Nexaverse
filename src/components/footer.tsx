@@ -137,7 +137,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 border-t border-gray-200 dark:border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-600 dark:text-gray-400 text-sm">&copy; {new Date().getFullYear()} NexaWork. All rights reserved.</p>
+          <p className="text-gray-600 dark:text-gray-400 text-sm">&copy; {new Date().getFullYear()} NexaVerse. All rights reserved.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link href="/terms" className="text-gray-600 hover:text-nexapurple-700 dark:text-gray-400 dark:hover:text-nexapurple-500 text-sm">Terms</Link>
             <Link href="/privacy" className="text-gray-600 hover:text-nexapurple-700 dark:text-gray-400 dark:hover:text-nexapurple-500 text-sm">Privacy</Link>
