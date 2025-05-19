@@ -14,7 +14,7 @@ interface StatItem {
  /* counting items */
  function Stat({ end, suffix = '', prefix = '', label, delay = 0 }: StatItem) {
   const ref = useRef<HTMLDivElement | null>(null)
-  const isInView = useInView(ref, { once: true, amount: 0.3 })
+  const isInView = useInView(ref, { amount: 0.3 })
 
     return (
     <motion.div
