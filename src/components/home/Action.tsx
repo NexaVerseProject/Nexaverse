@@ -24,7 +24,7 @@ export function ToAction() {
                                 Ready to Transform Your Freelance Career?
                             </h2>
                             <p className="max-w-[600px] text-nexapurple-100 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                                Join thousands of freelancers and clients already using NexaWork to revolutionize their work. Get
+                                Join thousands of freelancers and clients already using NexaVerse to revolutionize their work. Get
                                 started in minutes and connect with global opportunities.
                             </p>
                         </div>
@@ -56,7 +56,7 @@ export function ToAction() {
                     >
                         <div className="rounded-lg bg-nexapurple-800/50 backdrop-blur-sm p-6 shadow-glow border border-white/10 hover:border-nexapurple-400/30 transition-all duration-300">
                             <div className="space-y-2 mb-4">
-                                <h3 className="text-xl font-bold">Get the NexaWork App</h3>
+                                <h3 className="text-xl font-bold">Get the NexaVerse App</h3>
                                 <p className="text-nexapurple-100">Manage your freelance career on the go.</p>
                             </div>
                             <div className="flex flex-col sm:flex-row gap-3">

@@ -85,13 +85,13 @@ export default function Navbar() {
               className="flex items-center space-x-2"
             >
               <span className="text-3xl font-bold text-nexapurple-700">
-                NexaWork
+                NexaVerse
               </span>
             </Link>
           ) : (
             <Link href="/" className="flex items-center space-x-2">
               <span className="text-3xl font-bold text-nexapurple-700">
-                NexaWork
+                NexaVerse
               </span>
             </Link>
           )}

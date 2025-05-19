@@ -10,7 +10,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center space-x-2 mb-5">
-              <span className="text-3xl font-bold text-nexapurple-700"> NexaWork </span>
+              <span className="text-3xl font-bold text-nexapurple-700"> NexaVerse </span>
             </Link>
             <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-md text-lg">
               The decentralized freelance platform powered by blockchain
@@ -130,7 +130,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center lg:justify-end text-gray-600 dark:text-gray-400">
                 <Mail className="h-4 w-4 mr-2" />
-                <span className="text-sm">support@nexawork.com</span>
+                <span className="text-sm">support@nexaverse.com</span>
               </div>
             </div>
           </div>

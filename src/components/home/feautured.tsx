@@ -11,7 +11,7 @@ export function Features () {
                         <div className="inline-block rounded-lg bg-nexapurple-100 px-3 py-1 text-sm dark:bg-nexapurple-900/30">
                             Platform Features
                         </div>
-                        <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">Why Choose NexaWork?</h2>
+                        <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">Why Choose NexaVerse?</h2>
                         <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
                             Our blockchain-powered platform offers unique advantages for both freelancers and clients.
                         </p>

@@ -47,7 +47,7 @@ export function Hero() {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="max-w-[600px] text-gray-300 md:text-xl py-3"
               >
-                NexaWork connects talented freelancers with global opportunities through blockchain technology. Secure
+                NexaVerse connects talented freelancers with global opportunities through blockchain technology. Secure
                 payments, transparent contracts, and earn NexaPoints with every completed job.
               </motion.p>
             </div>
@@ -146,7 +146,7 @@ export function Hero() {
               <div className="relative z-10bg-black/40 backdrop-blur-sm rounded-2xl shadow-glow overflow-hidden border border-white/20 hover:border-nexapurple-400/50 transition-all duration-500 group">
                 <div className="bg-nexapurple-600 p-4">
                   <div className="flex justify-between items-center">
-                    <div className="text-white font-medium">NexaWork Dashboard</div>
+                    <div className="text-white font-medium">NexaVerse Dashboard</div>
                     <div className="flex space-x-1">
                       <div className="h-2 w-2 rounded-full bg-red-500"></div>
                       <div className="h-2 w-2 rounded-full bg-yellow-500"></div>
