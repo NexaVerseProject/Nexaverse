@@ -67,7 +67,7 @@ export function Hero() {
               <Button
                 variant="outline"
                 className="border-gray-300 dark:border-white/20 text-foreground dark:text-white hover:bg-gray-100 dark:hover:bg-white/10 px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-base md:px-8 md:py-4 md:text-lg w-full sm:w-auto "
-                onClick={() => router.push("/marketplace")}
+                onClick={() => router.push("/login")}
               >
                 Explore Jobs
               </Button>
