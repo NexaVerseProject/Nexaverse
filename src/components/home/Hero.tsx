@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { useRouter } from "next/navigation"
+import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import {ArrowRight,Award,Wallet} from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 export function Hero() {
@@ -152,14 +153,12 @@ export function Hero() {
                     </div>
                   </div>
                 </div>
-                <div className="p-2 sm:p-3 md:p-4 xl:p-6 transition-all duration-500 group-hover:bg-black/20">
-                <img 
-                    src="/placeholder.svg?height=300&width=450"
-                    alt="Dashboard Preview"
-                    className="rounded-lg border border-white/10 transition-all duration-500 group-hover:border-nexapurple-400/30 group-hover:shadow-glow-sm"
-                    width={450}
-                    height={300}
-                  />
+                <div className="p-2 w-full sm:w-[300px] md:w-[400px] lg:w-[500px] h-[200px] sm:h-[250px] md:h-[300px] lg:h-[350px] sm:p-3 md:p-4 xl:p-6 transition-all duration-500 group-hover:bg-black/20">
+                   <DotLottieReact
+                      src="https://lottie.host/0262aaef-21a3-4e3b-a906-c619e2edfc29/FdtYUUwJzR.lottie"
+                      loop
+                      autoplay
+                    />
                 </div>
               </div>
             </div>
