@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { useRouter } from "next/navigation"
+import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import {ArrowRight,Award,Wallet} from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 export function Hero() {
@@ -67,7 +68,7 @@ export function Hero() {
               <Button
                 variant="outline"
                 className="border-gray-300 dark:border-white/20 text-foreground dark:text-white hover:bg-gray-100 dark:hover:bg-white/10 px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-base md:px-8 md:py-4 md:text-lg w-full sm:w-auto "
-                onClick={() => router.push("/marketplace")}
+                onClick={() => router.push("/login")}
               >
                 Explore Jobs
               </Button>
@@ -141,7 +142,7 @@ export function Hero() {
               </motion.div>
 
               {/* Dashboard Preview */}
-              <div className="relative z-10bg-black/40 backdrop-blur-sm rounded-2xl shadow-glow overflow-hidden border border-white/20 hover:border-nexapurple-400/50 transition-all duration-500 group">
+              <div className="relative z-10 bg-black/40 backdrop-blur-sm rounded-2xl shadow-glow overflow-hidden border border-white/20 hover:border-nexapurple-400/50 transition-all duration-500 group">
                 <div className="bg-nexapurple-600 p-2 sm:p-3 md:p-4 xl:p-6">
                   <div className="flex justify-between items-center">
                     <div className="text-xs sm:text-sm md:text-base xl:text-lg text-white font-medium">NexaVerse Dashboard</div>
@@ -152,14 +153,12 @@ export function Hero() {
                     </div>
                   </div>
                 </div>
-                <div className="p-2 sm:p-3 md:p-4 xl:p-6 transition-all duration-500 group-hover:bg-black/20">
-                <img 
-                    src="/placeholder.svg?height=300&width=450"
-                    alt="Dashboard Preview"
-                    className="rounded-lg border border-white/10 transition-all duration-500 group-hover:border-nexapurple-400/30 group-hover:shadow-glow-sm"
-                    width={450}
-                    height={300}
-                  />
+                <div className="p-2 w-full sm:w-[300px] md:w-[400px] lg:w-[500px] h-[200px] sm:h-[250px] md:h-[300px] lg:h-[350px] sm:p-3 md:p-4 xl:p-6 transition-all duration-500 group-hover:bg-black/20">
+                  <DotLottieReact
+                      src="https://lottie.host/217322bf-0033-42d2-83d2-d9d3917818a0/MWYcQy6YXe.lottie"
+                      loop
+                      autoplay
+                    />
                 </div>
               </div>
             </div>

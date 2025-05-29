@@ -146,7 +146,7 @@ export function Jobs() {
               <Button
                 variant="outline"
                 className="border-nexapurple-600 text-nexapurple-600 hover:bg-nexapurple-50 dark:border-nexapurple-400 dark:text-nexapurple-400 dark:hover:bg-nexapurple-950/50"
-                onClick={() => router.push("/marketplace")}
+                onClick={() => router.push("/login")}
               >
                 View All Jobs
                 <ArrowRight className="ml-2 h-4 w-4" />

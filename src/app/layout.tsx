@@ -7,6 +7,7 @@ import Navbar from "@/components/navbar";
 import { LayoutWrapper } from "@/components/LayoutWrapper";
 import dynamic from "next/dynamic";
 import { headers } from "next/headers";
+import { BackgroundBeams } from "@/components/ui/background-beams";
 const AppKitProvider = dynamic(() => import("@/components/providers/AppKitProvider").then((mod) => mod.AppKitProvider),
   { ssr: false }
 );
@@ -26,6 +27,7 @@ export default function RootLayout({children}: {children: React.ReactNode;}) {
     <html lang="en" className="dark" suppressHydrationWarning>
       <body className={`${outfit.variable} font-sans text-base bg-background text-foreground`} >
         <ThemeProvider>
+          <BackgroundBeams />
           <AppKitProvider cookies={cookies}>
             <div className="flex min-h-screen flex-col w-full">
               <Navbar />

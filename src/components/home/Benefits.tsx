@@ -1,18 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import {
-  ArrowRight,
-  Award,
-  Briefcase,
-  CheckCircle,
-  Clock,
-  Code,
-  Globe,
-  MapPin,
-  Shield,
-  Wallet
-} from "lucide-react"
+import {Globe, Shield, Wallet} from "lucide-react"
 
 const benefits = [
   {
