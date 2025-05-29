@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import Link from "next/link";
 import { ArrowRight, Globe, Users, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -15,7 +15,7 @@ export default function AboutPageClient() {
             Empowering Africa&apos;s Blockchain Ecosystem
           </h1>
           <p className="text-xl md:text-2xl max-w-3xl mb-8 text-muted-foreground">
-            NexaWork is building the bridge between global opportunities and
+            NexaVerse is building the bridge between global opportunities and
             Africa&apos;s emerging blockchain talent.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
@@ -45,7 +45,7 @@ export default function AboutPageClient() {
           <div className="order-2 md:order-1">
             <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
             <p className="text-lg mb-4 text-muted-foreground">
-              NexaWork was founded with a clear vision: to connect Africa&apos;s
+              NexaVerse was founded with a clear vision: to connect Africa&apos;s
               growing blockchain talent with global opportunities while
               fostering the development of a robust blockchain ecosystem across
               the continent.
@@ -62,11 +62,10 @@ export default function AboutPageClient() {
             </p>
           </div>
           <div className="order-1 md:order-2 relative h-[400px] rounded-xl overflow-hidden shadow-xl transform transition-all hover:scale-[1.02] duration-500">
-            <Image
-              src="/placeholder.svg?height=800&width=600"
-              alt="African tech professionals"
-              fill
-              className="object-cover"
+           <DotLottieReact
+                src="https://lottie.host/66461d3b-d612-4480-a5f9-d436f625129a/9USHpRaOuJ.lottie"
+                loop
+                autoplay
             />
           </div>
         </div>
@@ -247,10 +246,10 @@ export default function AboutPageClient() {
 
       {/* Join Us */}
       <section className="bg-gradient-to-r from-green-500/20 via-yellow-600/20 to-red-700/20 rounded-xl p-12 text-center">
-        <h2 className="text-3xl font-bold mb-6">Join the NexaWork Community</h2>
+        <h2 className="text-3xl font-bold mb-6">Join the NexaVerse Community</h2>
         <p className="text-xl max-w-3xl mx-auto mb-8 text-muted-foreground">
           Whether you&apos;re a blockchain professional looking for
-          opportunities or a business seeking top talent, NexaWork is your
+          opportunities or a business seeking top talent, NexaVerse is your
           gateway to Africa&apos;s blockchain ecosystem.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
