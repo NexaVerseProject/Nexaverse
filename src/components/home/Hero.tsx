@@ -142,7 +142,7 @@ export function Hero() {
               </motion.div>
 
               {/* Dashboard Preview */}
-              <div className="relative z-10bg-black/40 backdrop-blur-sm rounded-2xl shadow-glow overflow-hidden border border-white/20 hover:border-nexapurple-400/50 transition-all duration-500 group">
+              <div className="relative z-10 bg-black/40 backdrop-blur-sm rounded-2xl shadow-glow overflow-hidden border border-white/20 hover:border-nexapurple-400/50 transition-all duration-500 group">
                 <div className="bg-nexapurple-600 p-2 sm:p-3 md:p-4 xl:p-6">
                   <div className="flex justify-between items-center">
                     <div className="text-xs sm:text-sm md:text-base xl:text-lg text-white font-medium">NexaVerse Dashboard</div>
@@ -155,7 +155,7 @@ export function Hero() {
                 </div>
                 <div className="p-2 w-full sm:w-[300px] md:w-[400px] lg:w-[500px] h-[200px] sm:h-[250px] md:h-[300px] lg:h-[350px] sm:p-3 md:p-4 xl:p-6 transition-all duration-500 group-hover:bg-black/20">
                    <DotLottieReact
-                      src="https://lottie.host/0262aaef-21a3-4e3b-a906-c619e2edfc29/FdtYUUwJzR.lottie"
+                      src="https://lottie.host/217322bf-0033-42d2-83d2-d9d3917818a0/MWYcQy6YXe.lottie"
                       loop
                       autoplay
                     />
