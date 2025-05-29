@@ -154,7 +154,7 @@ export function Hero() {
                   </div>
                 </div>
                 <div className="p-2 w-full sm:w-[300px] md:w-[400px] lg:w-[500px] h-[200px] sm:h-[250px] md:h-[300px] lg:h-[350px] sm:p-3 md:p-4 xl:p-6 transition-all duration-500 group-hover:bg-black/20">
-                   <DotLottieReact
+                  <DotLottieReact
                       src="https://lottie.host/217322bf-0033-42d2-83d2-d9d3917818a0/MWYcQy6YXe.lottie"
                       loop
                       autoplay

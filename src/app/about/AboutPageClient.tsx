@@ -62,11 +62,11 @@ export default function AboutPageClient() {
             </p>
           </div>
           <div className="order-1 md:order-2 relative h-[400px] rounded-xl overflow-hidden shadow-xl transform transition-all hover:scale-[1.02] duration-500">
-           <DotLottieReact
-                src="https://lottie.host/66461d3b-d612-4480-a5f9-d436f625129a/9USHpRaOuJ.lottie"
-                loop
-                autoplay
-            />
+            <DotLottieReact
+                  src="https://lottie.host/66461d3b-d612-4480-a5f9-d436f625129a/9USHpRaOuJ.lottie"
+                  loop
+                  autoplay
+              />
           </div>
         </div>
       </section>
@@ -84,76 +84,11 @@ export default function AboutPageClient() {
                 <div className="absolute inset-0 bg-black/5 rounded-xl"></div>
                 <div className="relative h-full w-full">
                   {/* Africa Map SVG - This is a simplified placeholder */}
-                  <svg
-                    viewBox="0 0 800 800"
-                    className="h-full w-full"
-                    style={{
-                      filter: "drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.1))",
-                    }}
-                  >
-                    <path
-                      d="M400,100 C550,150 650,300 600,450 C550,600 450,700 350,650 C250,600 200,500 250,350 C300,200 350,150 400,100 Z"
-                      fill="url(#africaGradient)"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      className="text-primary/30"
-                    />
-                    <defs>
-                      <linearGradient
-                        id="africaGradient"
-                        x1="0%"
-                        y1="0%"
-                        x2="100%"
-                        y2="100%"
-                      >
-                        <stop
-                          offset="0%"
-                          stopColor="#4CAF50"
-                          stopOpacity="0.2"
-                        />
-                        <stop
-                          offset="50%"
-                          stopColor="#8B4513"
-                          stopOpacity="0.2"
-                        />
-                        <stop
-                          offset="100%"
-                          stopColor="#B71C1C"
-                          stopOpacity="0.2"
-                        />
-                      </linearGradient>
-                    </defs>
-
-                    {/* Hotspots for key blockchain hubs */}
-                    <circle
-                      cx="400"
-                      cy="200"
-                      r="15"
-                      fill="#4CAF50"
-                      className="animate-pulse"
-                    />
-                    <circle
-                      cx="350"
-                      cy="350"
-                      r="15"
-                      fill="#8B4513"
-                      className="animate-pulse"
-                    />
-                    <circle
-                      cx="450"
-                      cy="450"
-                      r="15"
-                      fill="#B71C1C"
-                      className="animate-pulse"
-                    />
-                    <circle
-                      cx="300"
-                      cy="250"
-                      r="15"
-                      fill="#4CAF50"
-                      className="animate-pulse"
-                    />
-                  </svg>
+                  <DotLottieReact
+                    src="https://lottie.host/3c665482-05f9-4d23-af74-e53c8726e532/R9b7XFGZIh.lottie"
+                    loop
+                    autoplay
+                  />
                 </div>
               </div>
               <div>
