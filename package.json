@@ -49,6 +49,7 @@
     "zustand": "^5.0.5"
   },
   "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
     "@types/next": "^8.0.7",
     "@types/node": "^20",
     "@types/react": "^18.3.20",
