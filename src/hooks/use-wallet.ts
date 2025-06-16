@@ -3,7 +3,6 @@
 import { useEffect, useState, useCallback, useMemo } from 'react';
 import { useAccount, useChainId, useDisconnect } from 'wagmi';
 import { useAppKit } from '@reown/appkit/react';
-import { networks } from '@/config/wallet';
 
 export function useWallet() {
     const { address, isConnected } = useAccount();
