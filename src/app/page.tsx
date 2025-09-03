@@ -1,31 +1,33 @@
-"use client"
-import { Hero } from "@/components/home/Hero"
-import { Features } from "@/components/home/feautured"
-import { Jobs } from "@/components/home/Jobs"
-import { Companies } from "@/components/home/Companies"
-import { Business } from "@/components/home/Business"
-import { Stats } from "@/components/home/Stats"
-import { ToAction } from "@/components/home/Action"
-import { Functionality } from "@/components/home/Functionality"
+import dynamic from "next/dynamic";
+
+const Hero = dynamic(() => import("@/components/home/Hero").then((m) => m.Hero), { ssr: false });
+const Features = dynamic(() => import("@/components/home/feautured").then((m) => m.Features), { ssr: false });
+const Jobs = dynamic(() => import("@/components/home/Jobs").then((m) => m.Jobs), { ssr: false });
+const Companies = dynamic(() => import("@/components/home/Companies").then((m) => m.Companies), { ssr: false });
+const Business = dynamic(() => import("@/components/home/Business").then((m) => m.Business), { ssr: false });
+const Stats = dynamic(() => import("@/components/home/Stats").then((m) => m.Stats), { ssr: false });
+const ToAction = dynamic(() => import("@/components/home/Action").then((m) => m.ToAction), { ssr: false });
+const Functionality = dynamic(() => import("@/components/home/Functionality").then((m) => m.Functionality), { ssr: false });
+
 export default function Home() {
   return (
     <div className="flex flex-col">
-      {/**the hero section */}
-      <Hero/>
+      {/* Hero section */}
+      <Hero />
       {/* Stats Section */}
-      <Stats/>      
-      {/**Opportunities secction */}
-      <Jobs/>
+      <Stats />
+      {/* Opportunities section */}
+      <Jobs />
       {/* For Business Section */}
-      <Business/>
-      {/**Platform Feautures section */}
-      <Features/>
+      <Business />
+      {/* Platform Features section */}
+      <Features />
       {/* How It Works Section */}
-      <Functionality/>
-      {/**Endorsments */}
-      <Companies/>
+      <Functionality />
+      {/* Endorsements */}
+      <Companies />
       {/* Call To Action Section */}
-      <ToAction/>
+      <ToAction />
     </div>
-  )
+  );
 }
