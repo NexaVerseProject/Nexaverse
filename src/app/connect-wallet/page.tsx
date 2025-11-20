@@ -59,7 +59,7 @@ export default function ConnectWallet() {
             Connect Your Wallet
           </h1>
           <p className="text-muted-foreground">
-            Connect your wallet to access the NexaWork platform and start
+            Connect your wallet to access the NexaVerse platform and start
             earning NexaPoints
           </p>
         </div>

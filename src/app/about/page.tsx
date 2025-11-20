@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import AboutPageClient from "./AboutPageClient";
-import { useEffect } from "react";
 
 export const metadata: Metadata = {
-  title: "About Us | NexaWork",
+  title: "About Us | NexaVerse",
   description:
-    "Learn about NexaWork and our mission to empower blockchain talent in Africa",
+    "Learn about NexaVerse and our mission to empower blockchain talent in Africa",
 };
 
 export default function AboutPage() {
