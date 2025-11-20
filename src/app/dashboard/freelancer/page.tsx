@@ -58,7 +58,7 @@ export default function FreelancerDashboard() {
                 Freelancer Dashboard
               </h1>
               <p className="text-xl text-muted-foreground mt-2">
-                Welcome back, Alex! Here's an overview of your freelance work.
+                Welcome back, Alex! Here&apos;s an overview of your freelance work.
               </p>
             </div>
             <div className="flex gap-3">

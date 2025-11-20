@@ -137,4 +137,5 @@ class ProposalsService {
   }
 }
 
-export default new ProposalsService();
+const proposalsService = new ProposalsService();
+export default proposalsService;

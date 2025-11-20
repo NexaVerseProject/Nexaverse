@@ -15,6 +15,7 @@ import DashboardLayout from "@/components/dashboard/dashboard-layout";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
+import Image from "next/image";
 
 declare global {
   interface Window {
@@ -37,7 +38,7 @@ export default function WalletPage() {
         window.open("https://metamask.io/download/", "_blank");
       }
     } catch (error) {
-      console.error("Error connecting wallet:", error);
+      // console.error("Error connecting wallet:", error);
     } finally {
       setIsLoading(false);
     }
@@ -279,10 +280,12 @@ export default function WalletPage() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="flex flex-col items-center">
-                    <div className="mb-4 bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
-                      <img
+                    <div className="mb-4 bg-muted p-4 rounded-lg">
+                      <Image
                         src="/placeholder.svg?height=200&width=200"
                         alt="QR Code"
+                        width={192}
+                        height={192}
                         className="w-48 h-48"
                       />
                     </div>

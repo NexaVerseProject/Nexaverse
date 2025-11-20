@@ -25,24 +25,31 @@ export const wagmiAdapter = new WagmiAdapter({
     projectId
 });
 
-// Create the AppKit modal
-createAppKit({
-    adapters: [wagmiAdapter],
-    projectId,
-    networks: networks as any,
-    metadata: {
-        name: 'NexaWork',
-        description: 'NexaWork - Blockchain Freelance Platform',
-        url: 'https://nexawork.io',
-        icons: ['https://nexawork.io/logo.png']
-    },
-    features: {
-        analytics: false,
-        email: false,
-        socials: ['google', 'github'],
-        emailShowWallets: true
-    },
-    themeMode: 'dark'
-});
+// Create the AppKit modal (client-only, single initialization)
+if (typeof window !== 'undefined') {
+    const globalScope = window as unknown as { __APPKIT_INITIALIZED__?: boolean };
+    if (!globalScope.__APPKIT_INITIALIZED__) {
+        const origin = window.location.origin;
+        createAppKit({
+            adapters: [wagmiAdapter],
+            projectId,
+            networks: networks as any,
+            metadata: {
+                name: 'NexaWork',
+                description: 'NexaWork - Blockchain Freelance Platform',
+                url: origin,
+                icons: [`${origin}/favicon.ico`]
+            },
+            features: {
+                analytics: false,
+                email: false,
+                socials: ['google', 'github'],
+                emailShowWallets: true
+            },
+            themeMode: 'dark'
+        });
+        globalScope.__APPKIT_INITIALIZED__ = true;
+    }
+}
 
 export const wagmiConfig = wagmiAdapter.wagmiConfig; 
