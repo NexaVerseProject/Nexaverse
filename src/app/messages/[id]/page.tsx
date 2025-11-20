@@ -118,7 +118,7 @@ export default function MessageDetailPage() {
                     <CardContent className="p-8 text-center">
                         <h2 className="text-xl font-semibold">Message not found</h2>
                         <p className="text-muted-foreground mt-2">
-                            The message you're looking for doesn't exist or you don't have
+                            The message you&apos;re looking for doesn&apos;t exist or you don&apos;t have
                             permission to view it.
                         </p>
                     </CardContent>

@@ -16,7 +16,7 @@ export default function JobPosterDashboard() {
                         <div>
                             <h1 className="text-4xl font-bold tracking-tight">Job Poster Dashboard</h1>
                             <p className="text-xl text-muted-foreground mt-2">
-                                Welcome back, TechRecruiter! Here's an overview of your job postings.
+                                Welcome back, TechRecruiter! Here&apos;s an overview of your job postings.
                             </p>
                         </div>
                         <div className="flex gap-3">

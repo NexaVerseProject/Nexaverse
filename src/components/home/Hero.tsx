@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { useRouter } from "next/navigation"
 import {ArrowRight,Award,Wallet} from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import Image from "next/image"
 export function Hero() {
   const router = useRouter()
   return (
@@ -153,7 +154,7 @@ export function Hero() {
                   </div>
                 </div>
                 <div className="p-2 sm:p-3 md:p-4 xl:p-6 transition-all duration-500 group-hover:bg-black/20">
-                <img 
+                <Image 
                     src="/placeholder.svg?height=300&width=450"
                     alt="Dashboard Preview"
                     className="rounded-lg border border-white/10 transition-all duration-500 group-hover:border-nexapurple-400/30 group-hover:shadow-glow-sm"

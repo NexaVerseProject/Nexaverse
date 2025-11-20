@@ -24,6 +24,8 @@ export function LayoutWrapper() {
       );
 
     setShouldRenderFooter(shouldShowFooter);
+    // footerVisibleRoutes is static
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname, isAuthenticated, isLoading]);
 
   if (!shouldRenderFooter) {

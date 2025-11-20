@@ -444,7 +444,7 @@ export default function PostJob() {
                     <div className="space-y-1">
                       <h4 className="font-medium">Description</h4>
                       <p className="text-sm text-muted-foreground">
-                        We're looking for an experienced Smart Contract
+                        We&apos;re looking for an experienced Smart Contract
                         Developer to join our team. The ideal candidate will
                         have strong experience with Solidity and blockchain
                         technologies...
@@ -573,7 +573,7 @@ export default function PostJob() {
                     <div>
                       <h3 className="font-medium">What happens next?</h3>
                       <p className="text-sm text-muted-foreground">
-                        After posting your job, you'll start receiving
+                        After posting your job, you&apos;ll start receiving
                         applications from qualified freelancers. You can review
                         their profiles, portfolios, and ratings to find the
                         perfect match for your project.

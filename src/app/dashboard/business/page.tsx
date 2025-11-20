@@ -16,7 +16,7 @@ export default function BusinessDashboard() {
                         <div>
                             <h1 className="text-4xl font-bold tracking-tight">Business Dashboard</h1>
                             <p className="text-xl text-muted-foreground mt-2">
-                                Welcome back, NexaTech! Here's an overview of your projects.
+                                Welcome back, NexaTech! Here&apos;s an overview of your projects.
                             </p>
                         </div>
                         <div className="flex gap-3">

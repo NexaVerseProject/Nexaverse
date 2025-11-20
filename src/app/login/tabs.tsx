@@ -125,7 +125,7 @@ export function LoginTabs() {
 
                 <div className="text-center pt-2">
                     <p className="text-base text-muted-foreground">
-                        Don't have an account?{" "}
+                        Don&apos;t have an account?{" "}
                         <Link href="/register" className="text-purple-400 hover:underline">
                             Sign up
                         </Link>
@@ -175,7 +175,7 @@ export function LoginTabs() {
 
                     <div className="text-center pt-4">
                         <p className="text-base text-muted-foreground">
-                            Don't have an account?{" "}
+                            Don&apos;t have an account?{" "}
                             <Link
                                 href="/register"
                                 className="text-purple-400 hover:underline"

@@ -87,6 +87,8 @@ export default function EditProfile() {
     } else if (savedUserType === "job-poster") {
       setSelectedSkills(userData["job-poster"].preferredSkills)
     }
+    // userData is static, no need to add to deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleSaveProfile = () => {

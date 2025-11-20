@@ -25,7 +25,7 @@ export default function AnalyticDashboard(){
         <main className="p-6 space-y-6">
           <h2 className="text-2xl font-bold">Welcome back, Alex</h2>
           <p className="text-muted-foreground">
-            Here's an overview of your freelancing activity and performance.
+            Here&apos;s an overview of your freelancing activity and performance.
           </p>
           <section className="animate-fade-in">
             <StatsCards />

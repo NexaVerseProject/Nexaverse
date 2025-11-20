@@ -21,36 +21,25 @@ export function ConnectButton() {
     setMounted(true);
   }, []);
 
-  // Debug log when component mounts
-  useEffect(() => {
-    if (mounted) {
-      console.log("ConnectButton mounted, AppKit available:", !!open);
-      console.log("Initial wallet connection state:", isConnected);
-    }
-  }, [mounted, open, isConnected]);
-
   const handleConnect = async () => {
     setIsLoading(true);
     setError(null);
 
     try {
-      console.log("ConnectButton: Attempting to open wallet modal");
       await open();
-      console.log("ConnectButton: Wallet modal opened successfully");
     } catch (err) {
-      console.error("ConnectButton: Error opening wallet modal:", err);
+      // console.error("ConnectButton: Error opening wallet modal:", err);
       setError(err instanceof Error ? err.message : String(err));
 
       // Fallback for MetaMask
       try {
         if (window.ethereum) {
-          console.log("Attempting direct MetaMask connection");
           await (window.ethereum as any).request({
             method: "eth_requestAccounts",
           });
         }
       } catch (fallbackErr) {
-        console.error("Fallback connection failed:", fallbackErr);
+        // console.error("Fallback connection failed:", fallbackErr);
       }
     } finally {
       // Always set loading to false when done

@@ -70,9 +70,10 @@ export function BasicInfoForm({ userType }: BasicInfoFormProps) {
         throw new Error("Registration failed");
       }
 
-      const data = await response.json();
+      // const data = await response.json();
       // show success message
-      console.log("Registration successful:", data);
+      // console.log("Registration successful:", data);
+      await response.json(); // Consume the body
       // Handle error response
     } catch (error) {
       console.error("Error during registration:", error);

@@ -19,6 +19,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Wallet, AlertCircle, CheckCircle2 } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import Image from "next/image";
 
 export function LoginForm() {
   const router = useRouter();
@@ -96,7 +97,7 @@ export function LoginForm() {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto bg-gray-900 border-gray-800">
+    <Card className="w-full max-w-md mx-auto bg-card border-border">
       <CardHeader className="space-y-1">
         <CardTitle className="text-2xl font-bold">
           Sign In to NexaWork
@@ -184,7 +185,7 @@ export function LoginForm() {
 
             <div className="text-center pt-2">
               <p className="text-base text-muted-foreground">
-                Don't have an account?{" "}
+                Don&apos;t have an account?{" "}
                 <Link
                   href="/register"
                   className="text-purple-400 hover:underline"
@@ -212,7 +213,7 @@ export function LoginForm() {
                   <p className="text-muted-foreground text-center mt-2">
                     Your wallet has been successfully connected to NexaWork
                   </p>
-                  <div className="w-full mt-6 p-4 border border-gray-700 rounded-lg">
+                  <div className="w-full mt-6 p-4 border border-border rounded-lg">
                     <div className="flex justify-between items-center">
                       <div className="font-mono text-base">0x71C...8F3E</div>
                       <div className="text-base font-medium text-green-500">
@@ -275,7 +276,7 @@ export function LoginForm() {
 
                 <div className="text-center mt-6">
                   <p className="text-base text-muted-foreground">
-                    Don't have an account?{" "}
+                    Don&apos;t have an account?{" "}
                     <Link
                       href="/register"
                       className="text-purple-400 hover:underline"
@@ -311,15 +312,17 @@ function WalletOption({
   return (
     <Button
       variant="outline"
-      className="w-full justify-between h-auto py-5 px-5 text-base border-gray-700"
+      className="w-full justify-between h-auto py-5 px-5 text-base border-border"
       onClick={onClick}
       disabled={disabled}
     >
       <div className="flex items-center">
-        <img
+        <Image
           src={icon || "/placeholder.svg"}
           alt={name}
-          className="w-7 h-7 mr-4"
+          className="mr-4"
+          width={28}
+          height={28}
         />
         <span className="text-base">{name}</span>
       </div>
